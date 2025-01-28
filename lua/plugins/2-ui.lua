@@ -39,6 +39,9 @@ return {
       },
     }
   },
+  {
+    "catppuccin/nvim",
+  },
 
   --  astrotheme [theme]
   --  https://github.com/AstroNvim/astrotheme

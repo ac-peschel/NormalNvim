@@ -72,8 +72,6 @@ return {
       require("luasnip").filetype_extend("python", { "pydoc" })
       require("luasnip").filetype_extend("rust", { "rustdoc" })
       require("luasnip").filetype_extend("cs", { "csharpdoc" })
-      require("luasnip").filetype_extend("java", { "javadoc" })
-      require("luasnip").filetype_extend("c", { "cdoc" })
       require("luasnip").filetype_extend("cpp", { "cppdoc" })
       require("luasnip").filetype_extend("php", { "phpdoc" })
       require("luasnip").filetype_extend("kotlin", { "kdoc" })
@@ -443,16 +441,6 @@ return {
         },
       }
 
-      -- F#
-      dap.configurations.fsharp = dap.configurations.cs
-
-      -- Visual basic dotnet
-      dap.configurations.vb = dap.configurations.cs
-
-      -- Java
-      -- Note: The java debugger jdtls is automatically spawned and configured
-      -- by the plugin 'nvim-java' in './3-dev-core.lua'.
-
       -- Python
       dap.adapters.python = {
         type = 'executable',
@@ -586,8 +574,8 @@ return {
           type = "dart",
           request = "launch",
           name = "Launch dart",
-          dartSdkPath = "/opt/flutter/bin/cache/dart-sdk/", -- ensure this is correct
-          flutterSdkPath = "/opt/flutter",                  -- ensure this is correct
+          dartSdkPath = "d:\\tools\\flutter_windows_3.27.3-stable\\flutter\\bin\\cache\\dart-sdk", -- ensure this is correct
+          flutterSdkPath = "d:\\tools\\flutter_windows_3.27.3-stable\\flutter",                  -- ensure this is correct
           program = "${workspaceFolder}/lib/main.dart",     -- ensure this is correct
           cwd = "${workspaceFolder}",
         },
@@ -595,8 +583,8 @@ return {
           type = "flutter",
           request = "launch",
           name = "Launch flutter",
-          dartSdkPath = "/opt/flutter/bin/cache/dart-sdk/", -- ensure this is correct
-          flutterSdkPath = "/opt/flutter",                  -- ensure this is correct
+          dartSdkPath = "d:\\tools\\flutter_windows_3.27.3-stable\\flutter\\bin\\cache\\dart-sdk", -- ensure this is correct
+          flutterSdkPath = "d:\\tools\\flutter_windows_3.27.3-stable\\flutter",                  -- ensure this is correct
           program = "${workspaceFolder}/lib/main.dart",     -- ensure this is correct
           cwd = "${workspaceFolder}",
         }
@@ -607,7 +595,7 @@ return {
       -- You must manually specify what the project root and main class are.
       dap.adapters.kotlin = {
         type = 'executable',
-        command = vim.fn.stdpath('data') .. '/mason/bin/kotlin-debug-adapter',
+        command = vim.fn.stdpath() .. '/mason/bin/kotlin-debug-adapter',
       }
       dap.configurations.kotlin = {
         {
@@ -707,35 +695,12 @@ return {
           terminalKind = "integrated",
         }
       }
-
-      -- Elixir
-      dap.adapters.mix_task = {
-        type = 'executable',
-        command = vim.fn.stdpath("data") .. '/mason/bin/elixir-ls-debugger',
-        args = {}
-      }
-      dap.configurations.elixir = {
-        {
-          type = "mix_task",
-          name = "mix test",
-          task = 'test',
-          taskArgs = { "--trace" },
-          request = "launch",
-          startApps = true, -- for Phoenix projects
-          projectDir = "${workspaceFolder}",
-          requireFiles = {
-            "test/**/test_helper.exs",
-            "test/**/*_test.exs"
-          }
-        },
-      }
     end, -- of dap config
     dependencies = {
       "rcarriga/nvim-dap-ui",
       "rcarriga/cmp-dap",
       "jay-babu/mason-nvim-dap.nvim",
       "jbyuki/one-small-step-for-vimkind",
-      "nvim-java/nvim-java",
     },
   },
 
@@ -808,7 +773,6 @@ return {
       "Issafalcon/neotest-dotnet",
       "jfpedroza/neotest-elixir",
       "fredrikaverpil/neotest-golang",
-      "rcasia/neotest-java",
       "nvim-neotest/neotest-jest",
       "olimorris/neotest-phpunit",
       "nvim-neotest/neotest-python",
@@ -823,7 +787,6 @@ return {
           require("neotest-dotnet"),
           require("neotest-elixir"),
           require("neotest-golang"),
-          require("neotest-java"),
           require("neotest-jest"),
           require("neotest-phpunit"),
           require("neotest-python"),
